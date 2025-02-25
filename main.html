@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Configuration Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        
+        :root{
+            --color: #FFEDEE;
+        }
+        .main-container{
+            background-color: var(--color);
+        }
+        .header-title{
+            height: 150px;
+        }
+        .form-container{
+            background: linear-gradient(rgba(70, 70, 70, 1) 0%, rgba(172, 172, 172, 1) 100%);
+            height: 100%;
+            border-radius: 100px 100px 0 0;
+            box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25); 
+        }
+        .card{
+            width: 90%; 
+            /* z-index: 9;            */
+        }
+        .firstCard{
+            background-color: var(--color);
+            height: 70px;
+        }
+        .circle{
+            height: 100px;
+            width: 100px;
+            background-color: var(--color);
+            border-radius: 50px;
+            transform: translateX(-40px);
+
+        }
+        .circle img{
+            height: 35px;
+            width: 35px;
+        }
+
+        .fc{
+            border-left: 0;
+        }
+        .textSpan{
+            margin-left: -20px !important;
+        }
+        .setcard{
+            width: 50%;
+        }
+        .setcard input[type="text"]{
+            background: none;
+            border: 0;
+        }
+        .scrollDiv{
+            height: 280px;
+            overflow: auto;
+        }
+        input:focus{
+            border-color: var(--color) !important;
+        }
+        .setborder{
+            border-right: 0px;
+            border-radius: 10px 0px 0px 10px;
+        }
+        .borderset{
+            border-radius: 0px 10px 10px 0px;
+        }
+        .btn, .btn:focus{
+            box-shadow: none !important;
+        }
+        .insideCircle{
+            height: 25px;
+            width: 25px;
+            border-radius: 50px;
+            background-color: rgba(207, 0, 15, 0.61);
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        }
+        .custom-checkbox{
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 6px;
+            border: 2px solid #fea1a6;
+            background-color: white;
+            cursor: pointer;
+            box-shadow: 0px 4px 4px 0px rgba(68, 56, 56, 0.25);
+            transition: all 0.3s ease;
+        }
+        .custom-checkbox:checked{
+            background-color: #FFEDEE;
+            border-color: var(--color);
+        }
+
+        .custom-checkbox:checked::after {
+            content: '✓';
+            color: black;
+        }
+        .form-control{
+            border-radius: 7px;
+            border-color: rgba(0, 0, 0, 0.15);
+            height: 50px; 
+        }
+        .form-control::placeholder{
+            padding-left: 10px;
+        }
+        .form-control:not(:placeholder-shown) {
+            padding-left: 20px;
+        }
+        .form-control:focus {
+            border-color: #cf000f !important;
+            box-shadow: none;
+            outline: 0;
+        }
+        .inside-cards{
+            height: 40px;
+            background-color: rgba(217, 217, 217, 0.35);
+        }
+        .inside-cards img{
+            height: 25px;
+            width: 25px;
+        }
+        .text{
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .uploadBtn{
+            border-radius: 12px;
+        }
+
+        /* nested styles */
+        .branch-structure {
+            display: flex;
+            /* justify-content: end; */
+            align-items:self-end;
+        }
+        
+        .main-vertical {
+            width: 4px;
+            height: 40px;
+            background-color: #808080;
+            border-radius:5px 5px 0px 0px ;
+        }
+        
+        .branch {
+            display: flex;
+            align-items: center;
+        }
+        
+        .horizontal-line {
+            width: 15px;
+            height: 4px;
+            background-color: #808080;
+            border-radius: 0px 5px 5px 0px;
+        }
+        .rotate-45{
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+        .btn-container{
+            background: none;
+        }
+        .submit{
+            background-color: var(--color);
+            border: none;
+            border-radius: 10px;
+            width: 100px;
+            height: 40px;
+        }
+        .submit:hover{
+            color: white;
+            background: #000;
+        }
+         /* Add this media query for mobile screens */
+         @media (max-width: 768px) {
+            .form-container{
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .setcard {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            .circle{
+                transform: translateX(-30px) !important;
+            }
+            .card-body {
+                flex-direction: column;
+            }
+        }
+        
+    </style>
+</head>
+<body style="height: 100vh;">
+
+    <div class="container-fluid px-0">
+
+        <div class="main-container">
+
+            <div class="header-title d-flex align-items-center justify-content-start">
+                <p class="fs-3 text-black ms-5 fw-bold">Supplier Configuration Profile <small class="fs-6 text-black">(Supplier Name)</small></p>
+            </div> 
+
+            <!-- Main Solution -->
+            <div class="form-container d-flex justify-content-center flex-column align-items-center py-5">
+                
+                <!-- Product section -->
+                <div class="card fc border-0">
+
+                    <div class="card-header d-flex align-items-center border-0 firstCard">
+
+                            <div class="circle border-0 d-flex align-items-center justify-content-center">
+                                <img src="products.png" alt="products-icon">
+                            </div>
+                            <span class="fs-4 fw-bold textSpan">Product</span>
+                    </div>
+
+                    <div class="card-body d-flex justify-content-center px-5 py-3">
+
+                        <div class="card setcard">
+
+                            <div class="card-header fw-lighter d-flex justify-content-between" style="height: 43px;">
+                                <input type="text" placeholder="Search Product">
+                                <img src="search.png" alt="searchIcon" height="25px" width="25px">
+                            </div>
+
+                            <div class="card-body" style="height: 350px;">
+
+                            <div class="scrollDiv px-4 my-3">
+                                
+                               <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="button" class="btn" id="btn-1">
+                                            <div class="insideCircle">
+                                                <img src="add.png" alt="addIcon" height="12px" width="12px">
+                                            </div>
+                                        </button>
+                                        <span class="fs-5 fw-500">Gland Packing</span>
+                                    </div>
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                    </div>
+                               </div>
+
+                               <!-- When on click this will open -->
+                               <div class="treeView ms-4 d-none">
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="branch-structure">
+                                            <div class="main-vertical"></div>
+                                            <div class="branch">
+                                                <div class="horizontal-line"></div>
+                                                <img src="arrow.png" alt="right arrow" style="height: 10px; width: 10px;">
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-container d-flex mt-4 gap-2">
+                                            <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                            <span class="fs-6 fw-500">Gland Packing</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="branch-structure">
+                                            <div class="main-vertical"></div>
+                                            <div class="branch">
+                                                <div class="horizontal-line"></div>
+                                                <img src="arrow.png" alt="right arrow" style="height: 10px; width: 10px;">
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-container d-flex mt-4 gap-2">
+                                            <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                            <span class="fs-6 fw-500">Gland Packing</span>
+                                        </div>
+                                    </div>
+
+                               </div>
+
+
+
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="button" class="btn">
+                                            <div class="insideCircle">
+                                                <img src="add.png" alt="addIcon" height="12px" width="12px">
+                                            </div>
+                                        </button>
+                                        <span class="fs-5 fw-500">Expansion joint Metal</span>
+                                    </div>
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" class="custom-checkbox d-flex
+                                        justify-content-center">
+                                    </div>
+                                </div>
+                                 
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="button" class="btn">
+                                            <div class="insideCircle">
+                                                <img src="add.png" alt="addIcon" height="12px" width="12px">
+                                            </div>
+                                        </button>
+                                        <span class="fs-5 fw-500">Spiral Wound Gasket</span>
+                                    </div>
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" class="custom-checkbox d-flex 
+                                        justify-content-center">
+                                    </div>
+                                </div> 
+                                
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="button" class="btn">
+                                            <div class="insideCircle">
+                                                <img src="add.png" alt="addIcon" height="12px" width="12px">
+                                            </div>
+                                        </button>
+                                        <span class="fs-5 fw-500">Expansion Joint Fabric</span>
+                                    </div>
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                    </div>                                    
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="button" class="btn">
+                                            <div class="insideCircle">
+                                                <img src="add.png" alt="addIcon" height="12px" width="12px">
+                                            </div>
+                                        </button>
+                                        <span class="fs-5 fw-500">Expansion Joint Rubber</span>
+                                    </div>
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                    </div> 
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="button" class="btn">
+                                            <div class="insideCircle">
+                                                <img src="add.png" alt="addIcon" height="12px" width="12px">
+                                            </div>
+                                        </button>
+                                        <span class="fs-5 fw-500">Consumables</span>
+                                    </div>
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                    </div>
+                                </div>                                
+
+                             <!-- scroll div ends here -->
+                            </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card setcard">
+                            <div class="card-header fw-lighter d-flex justify-content-between align-items-center" style="height: 43px;">
+                                <span class="fw-bold">Selected Product</span>
+                                <img src="products.png" alt="searchIcon" height="20px" width="20px">
+                            </div>
+
+                            <div class="card-body" style="height: 350px;">
+
+                                <div class="scrollDiv px-5 my-3">                                    
+                                      
+                                    <!-- Selected Products (add d-none here)-->
+                                    <div class="mt-3 onCheck d-none">
+
+                                        <div class="d-flex align-items-center gap-3">
+                                                <div class="checkbox-container">
+                                                    <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                                </div>
+                                                <span class="fs-5 fw-500">Gland Packing</span>
+                                            </div>
+                                        
+                                        <div class="d-flex align-items-center ms-2 gap-1">
+                                            <!-- <img src="nested.png" alt="nestedIcon" style="height: 40px; width: 40px;"> -->
+                                            <div class="branch-structure">
+                                                <div class="main-vertical"></div>
+                                                <div class="branch">
+                                                    <div class="horizontal-line"></div>
+                                                    <img src="arrow.png" alt="right arrow" style="height: 10px; width: 10px;">
+                                                </div>
+                                            </div>
+                                            <div class="checkbox-container d-flex mt-4 gap-3">
+                                                <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                                <span class="fs-6 fw-500">Gland Packing</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center ms-2 gap-1">
+                                            <!-- <img src="nested.png" alt="nestedIcon" style="height: 40px; width: 40px;"> -->
+                                            <div class="branch-structure">
+                                                <div class="main-vertical"></div>
+                                                <div class="branch">
+                                                    <div class="horizontal-line"></div>
+                                                    <img src="arrow.png" alt="right arrow" style="height: 10px; width: 10px;">
+                                                </div>
+                                            </div>
+                                            <div class="checkbox-container d-flex mt-4 gap-3">
+                                                <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                                <span class="fs-6 fw-500">Gland Packing</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="onCheck d-none">
+                                        <div class="d-flex justify-content-start align-items-center mt-3">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="checkbox-container">
+                                                    <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                                </div>
+                                                <span class="fs-5 fw-500">Expansion Joint Metal</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center ms-2 gap-1">
+                                            <!-- <img src="nested.png" alt="nestedIcon" style="height: 40px; width: 40px;"> -->
+                                            <div class="branch-structure">
+                                                <div class="main-vertical"></div>
+                                                <div class="branch">
+                                                    <div class="horizontal-line"></div>
+                                                    <img src="arrow.png" alt="right arrow" style="height: 10px; width: 10px;">
+                                                </div>
+                                            </div>
+                                            <div class="checkbox-container d-flex mt-4 gap-3">
+                                                <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                                <span class="fs-6 fw-500">Expansion Joint Metal</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center ms-2 gap-1">
+                                            <!-- <img src="nested.png" alt="nestedIcon" style="height: 40px; width: 40px;"> -->
+                                            <div class="branch-structure">
+                                                <div class="main-vertical"></div>
+                                                <div class="branch">
+                                                    <div class="horizontal-line"></div>
+                                                    <img src="arrow.png" alt="right arrow" style="height: 10px; width: 10px;">
+                                                </div>
+                                            </div>
+                                            <div class="checkbox-container d-flex mt-4 gap-3">
+                                                <input type="checkbox" class="custom-checkbox d-flex justify-content-center">
+                                                <span class="fs-6 fw-500">Expansion Joint Metal</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Address section -->
+                <div class="card fc border-0 mt-5">
+
+                    <div class="card-header d-flex align-items-center border-0 firstCard">
+
+                        <div class="circle border-0 d-flex align-items-center justify-content-center">
+                            <img src="address.png" alt="address-icon">
+                        </div>
+                        <span class="fs-4 fw-bold textSpan">Address</span>
+
+                    </div>
+
+                    <div class="card-body px-5 ">
+
+                        <div class="row g-3">
+
+                            
+                            <div class="col-md-6 py-2">
+                                <input type="text" class="form-control" placeholder="Address Name" aria-label="address">
+                            </div>
+                            
+                            <div class="col-md-6 py-2">
+                                <input type="text" class="form-control" placeholder="Address Line 2" aria-label="address-2">
+                            </div>
+
+                            <div class="col-md-6 py-2">
+                                <input type="text" class="form-control" placeholder="Address line 1" aria-label="address-2">
+                            </div>
+
+                            <div class="col-md-3 py-2">
+                                <input type="text" class="form-control" placeholder="Country" aria-label="country">
+                            </div>
+
+                            <div class="col-md-3 py-2">
+                                <input type="text" class="form-control" placeholder="Provinces" aria-label="Provinces">
+                            </div>
+
+                            <div class="col-md-3 py-2">
+                                <input type="text" class="form-control" placeholder="Sub-district" aria-label="subDistrict">
+                            </div>
+
+                            <div class="col-md-3 py-2">
+                                <input type="text" class="form-control" placeholder="District" aria-label="district">
+                            </div>
+
+                            <div class="col-md-3 py-2"></div>
+
+                            <div class="col-md-3 py-2"></div>
+
+                            <div class="col-md-3 py-2">
+                                <input type="text" class="form-control" placeholder="City/Regency" aria-label="City">
+                            </div>
+
+                            <div class="col-md-3 py-2">
+                                <input type="text" class="form-control" placeholder="Pincode" aria-label="pincode">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                 <!-- Company Details -->
+                <div class="card fc border-0 mt-5">
+
+                    <div class="card-header d-flex align-items-center border-0 firstCard">
+
+                        <div class="circle border-0 d-flex align-items-center justify-content-center">
+                            <img src="contact.png" alt="address-icon">
+                        </div>
+                        <span class="fs-4 fw-bold textSpan">Company Primary Details</span>
+
+                    </div>
+
+                    <div class="d-flex align-items-center flex-column mb-3">
+
+                    <div class="card mt-3">
+                        <div class="card-header d-flex align-items-center gap-3 border-0 inside-cards">
+                            
+                            <span>
+                                <img src="details-1.png" alt="DetailsIcon">
+                            </span>
+                            <span class="fs-5 fw-bold">
+                                Personal contact Details
+                            </span>
+
+                        </div>
+
+                        <div class="card-body px-5">
+
+                            <div class="row g-3">
+
+                                
+                            <div class="col-md-4 py-2">
+                                <input type="text" class="form-control" placeholder="Company Name" aria-label="address">
+                            </div>
+
+                            <div class="col-md-4 py-2">
+                                <input type="text" class="form-control" placeholder="First Name" aria-label="address">
+                            </div>
+
+                            <div class="col-md-4 py-2">
+                                <input type="text" class="form-control" placeholder="Last Name" aria-label="address">
+                            </div>
+
+
+                            <div class="col-md-4 py-2">
+                                <input type="text" class="form-control" placeholder="E-mail" aria-label="address">
+                            </div>
+
+                            <div class="col-md-4 py-2">
+                                <input type="text" class="form-control" placeholder="Mobile No." aria-label="address">
+                            </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="card mt-3">
+                        <div class="card-header d-flex align-items-center gap-3 border-0 inside-cards">
+
+                            <span>
+                                <img src="details-2.png" alt="DetailsIcon">
+                            </span>
+                            <span class="fs-5 fw-bold">
+                                Company Details
+                            </span>
+
+                        </div>
+
+                        <div class="card-body px-5">
+
+                            <div class="row g-3">
+
+                                
+                            <div class="col-md-4 py-2">
+                                <input type="text" class="form-control" placeholder="NIB" aria-label="address">
+                            </div>
+
+                            <div class="col-md-4 py-2">
+                                <input type="text" class="form-control" placeholder="NPWP" aria-label="address">
+                            </div>
+
+                            <div class="col-md-4 py-2">
+
+                                <span>Company type?</span>
+                                <div class="d-flex flex-row gap-2">
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      Non-Pkp
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                      Pkp
+                                    </label>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 py-2">
+
+                                <span class="ms-2">NIB</span>
+                                <div class="d-flex justify-content-center align-items-center gap-2 uploadBtn" href="#" style="height: 30px; width: 100px; background-color: rgba(217, 217, 217, 0.24);">
+                                    <img src="upload.png" alt="uploadIcon" style="height: 15px; width: 15px;">
+                                    <span class="text-secondary text">Browse</span>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-4 py-2">
+
+                                <span class="ms-2">NPWP</span>
+                                <div class="d-flex justify-content-center align-items-center gap-2 uploadBtn" href="#" style="height: 30px; width: 100px; background-color: rgba(217, 217, 217, 0.24);">
+                                    <img src="upload.png" alt="uploadIcon" style="height: 15px; width: 15px;">
+                                    <span class="text-secondary text">Browse</span>
+                                </div>
+
+
+                            </div>
+
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+
+                    </div>
+
+
+                </div>
+
+                <!-- buttons -->
+                <div class="card-container pt-5 d-flex justify-content-center w-100">
+
+                    <div class="card border-0 btn-container">
+                      <div class="col-md-12 my-2 text-end">
+                        <button type="button" class="submit text-black fw-bold shadow">Skip</button>
+                        <button type="button" class="submit text-black fw-bold shadow">Next</button>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>
