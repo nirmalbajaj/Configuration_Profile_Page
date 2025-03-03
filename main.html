@@ -24,7 +24,7 @@
         }
         .card{
             width: 90%; 
-            /* z-index: 9;            */
+            /* z-index: 9; */
         }
         .firstCard{
             background-color: var(--color);
@@ -93,12 +93,21 @@
         }
         .custom-checkbox:checked{
             background-color: #FFEDEE;
-            border-color: var(--color);
+            border-color: #fea1a6 !important;
         }
 
         .custom-checkbox:checked::after {
             content: '✓';
             color: black;
+        }
+        /* Add these new rules to force the unchecked state styles in Chrome */
+        .custom-checkbox:not(:checked) {
+            background-color: white !important;
+            border: 2px solid #fea1a6 !important;
+        }
+
+        .custom-checkbox:not(:checked)::after {
+            content: none;
         }
         .form-control{
             border-radius: 7px;
@@ -192,6 +201,8 @@
                 flex-direction: column;
             }
         }
+        
+        
         
     </style>
 </head>
